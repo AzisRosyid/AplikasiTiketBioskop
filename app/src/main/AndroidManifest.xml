@@ -17,6 +17,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".MyTicketActivity"
+            android:exported="false"
+            android:label="@string/title_activity_my_ticket"
+            android:theme="@style/Theme.AplikasiTiketBioskop" />
+        <activity
             android:name=".TicketOrderActivity"
             android:exported="false"
             android:label="@string/title_activity_ticket_order"

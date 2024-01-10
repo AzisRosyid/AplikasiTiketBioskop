@@ -5,6 +5,7 @@ import com.example.aplikasitiketbioskop.model.OrderModel
 import com.example.aplikasitiketbioskop.model.UserModel
 import com.example.aplikasitiketbioskop.model.ResponseModel
 import com.example.aplikasitiketbioskop.model.SeatModel
+import com.example.aplikasitiketbioskop.model.TicketModel
 import com.example.aplikasitiketbioskop.model.User
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -37,4 +38,7 @@ interface ApiEndPoint {
     @FormUrlEncoded
     @POST("order/detail")
     fun createOrderDetail(@Field("order_id") order: Int, @Field("movie_schedule_id") schedule: Int, @Field("seat_id") seat: Int, @Field("date_screening") date: String): Call<ResponseModel>
+
+    @GET("ticket")
+    fun getTicket(): Call<TicketModel>
 }

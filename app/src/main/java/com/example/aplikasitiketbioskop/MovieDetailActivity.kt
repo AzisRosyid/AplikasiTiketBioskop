@@ -51,14 +51,12 @@ class MovieDetailActivity : ComponentActivity() {
                         .fillMaxSize()
                         .background(MaterialTheme.colorScheme.background)
                 ) {
-
                     Column(
                         modifier = Modifier
                             .verticalScroll(rememberScrollState())
                             .padding(vertical = 42.dp)
 
                     ) {
-
                         MovieDetailContent(movie)
                     }
 
@@ -157,7 +155,6 @@ private fun MovieDetailContent(movie: Movie) {
                     )
                 }
 
-                // TextView for movie description
                 Text(
                     text = movie.description,
                     style = MaterialTheme.typography.bodyMedium,

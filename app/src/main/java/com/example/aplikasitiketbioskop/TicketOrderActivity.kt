@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -110,7 +111,6 @@ class TicketOrderActivity : ComponentActivity() {
         val viewModel = remember { TicketOrderViewModel() }
         var seatModel by remember { mutableStateOf<SeatModel?>(null)}
 
-
         LaunchedEffect(movie) {
             movieModel = showMovie(movie.id)
         }
@@ -156,8 +156,6 @@ class TicketOrderActivity : ComponentActivity() {
                         Text("Finish", color = Color.White)
                     }
                 }
-
-                
             }
         } ?: run {
             // Show error message if movieModel is null
@@ -612,6 +610,7 @@ fun MyDatePickerDialog(
     } ?: ""
 
     DatePickerDialog(
+        modifier = Modifier.width(200.dp),
         onDismissRequest = { onDismiss() },
         confirmButton = {
             Button(onClick = {
