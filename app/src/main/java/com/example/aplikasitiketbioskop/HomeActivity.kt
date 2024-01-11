@@ -70,11 +70,6 @@ class HomeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AplikasiTiketBioskopTheme {
-                Column {
-                    CustomTopBar()
-
-                }
-
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -114,7 +109,7 @@ class HomeActivity : ComponentActivity() {
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp).padding(vertical = 40.dp)
         ) {
             items(movies) { movie ->
                 MovieCard(movie = movie)

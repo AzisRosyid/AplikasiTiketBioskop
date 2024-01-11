@@ -9,10 +9,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -122,7 +124,7 @@ private fun TicketCard(ticket: Ticket) {
             modifier = Modifier
                 .fillMaxSize()
                 .clickable {
-                    val intent = Intent(context, MovieDetailActivity::class.java)
+                    val intent = Intent(context, TicketDetailActivity::class.java)
                     intent.putExtra("ticket", ticket)
                     context.startActivity(intent)
                 }
@@ -133,19 +135,23 @@ private fun TicketCard(ticket: Ticket) {
                 model = "${Helper.BASE_IMAGE}${ticket.movie_image}"
             }
 
-            Row {
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
                 AsyncImage(
                     model = model,
                     contentDescription = null,
                     contentScale = ContentScale.FillWidth,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(180.dp)
+                        .width(120.dp)
+                        .height(160.dp)
                 )
 
                 Column(
                     modifier = Modifier
-                        .padding(16.dp)
+                        .padding(horizontal = 8.dp)
+                        .padding(top = 16.dp)
                         .fillMaxWidth()
                 ) {
                     Text(
@@ -156,6 +162,8 @@ private fun TicketCard(ticket: Ticket) {
                     )
                     Text(text = "Date: ${ticket.date}", style = MaterialTheme.typography.bodyMedium)
                     Text(text = "Time: ${ticket.start_time} - ${ticket.end_time}", style = MaterialTheme.typography.bodyMedium)
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(text = "Status: ${ticket.status}", style = MaterialTheme.typography.bodyLarge)
                 }
             }
         }
