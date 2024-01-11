@@ -198,7 +198,7 @@ private fun CustomTopBar() {
         contentAlignment = Alignment.TopCenter
     ) {
         Text(
-            text = "Tiket Saya",
+            text = "My Ticket",
             style = MaterialTheme.typography.headlineMedium.copy(
                 fontWeight = FontWeight.Bold,
                 color = Color.White

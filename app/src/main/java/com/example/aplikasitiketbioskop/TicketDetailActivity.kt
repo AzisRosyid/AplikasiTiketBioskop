@@ -203,7 +203,7 @@ private fun CustomTopBar() {
         contentAlignment = Alignment.TopCenter
     ) {
         Text(
-            text = "Movie Detail",
+            text = "Ticket Detail",
             style = MaterialTheme.typography.headlineMedium.copy(
                 fontWeight = FontWeight.Bold,
                 color = Color.White
