@@ -109,7 +109,7 @@ class TicketOrderActivity : ComponentActivity() {
         val movie = remember { getSerializable(this, "movie", Movie::class.java) }
         var movieModel by remember { mutableStateOf<MovieModel?>(null) }
         val viewModel = remember { TicketOrderViewModel() }
-        var seatModel by remember { mutableStateOf<SeatModel?>(null)}
+        var seatModel by remember { mutableStateOf<SeatModel?>(null) }
 
         LaunchedEffect(movie) {
             movieModel = showMovie(movie.id)
@@ -136,8 +136,8 @@ class TicketOrderActivity : ComponentActivity() {
                 }
 
                 CustomTopBar()
-                
-                Column (
+
+                Column(
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .padding(vertical = 8.dp, horizontal = 16.dp)
@@ -145,10 +145,10 @@ class TicketOrderActivity : ComponentActivity() {
                 )
                 {
                     Text(text = "Grand Total: ${Helper.currencyFormat(viewModel.selectedSeats.count() * movie.price)}")
-                    
+
                     Button(
                         onClick = {
-                                  onFinish(viewModel)
+                            onFinish(viewModel)
                         },
                         modifier = Modifier.fillMaxWidth(),
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
@@ -194,7 +194,10 @@ class TicketOrderActivity : ComponentActivity() {
                                     viewModel.selectedTime.toInt(),
                                     seat.id,
                                     SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
-                                        SimpleDateFormat(Helper.DATE_PATTERN, Locale.getDefault()).parse(viewModel.selectedDate)
+                                        SimpleDateFormat(
+                                            Helper.DATE_PATTERN,
+                                            Locale.getDefault()
+                                        ).parse(viewModel.selectedDate)
                                     )
                                 ).enqueue(object : Callback<ResponseModel> {
                                     override fun onResponse(
@@ -265,7 +268,10 @@ class TicketOrderActivity : ComponentActivity() {
 
             val selectedDate: String? = try {
                 SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
-                    SimpleDateFormat(Helper.DATE_PATTERN, Locale.getDefault()).parse(viewModel.selectedDate)
+                    SimpleDateFormat(
+                        Helper.DATE_PATTERN,
+                        Locale.getDefault()
+                    ).parse(viewModel.selectedDate)
                 )
             } catch (e: java.text.ParseException) {
                 return null
@@ -304,7 +310,11 @@ class TicketOrderViewModel {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-private fun TicketOrderContent(movieModel: MovieModel, seatModel: SeatModel?, viewModel: TicketOrderViewModel) {
+private fun TicketOrderContent(
+    movieModel: MovieModel,
+    seatModel: SeatModel?,
+    viewModel: TicketOrderViewModel
+) {
     val movie: Movie = movieModel.movie
     // var selectedDate by remember { mutableStateOf(LocalDate.now()) }
 //    viewModel.selectedDate = "Open date picker dialog"
@@ -394,7 +404,7 @@ private fun TicketOrderContent(movieModel: MovieModel, seatModel: SeatModel?, vi
 
                     MyDatePickerDialog(viewModel)
                 }
-                
+
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Box(
@@ -434,17 +444,18 @@ private fun TicketOrderContent(movieModel: MovieModel, seatModel: SeatModel?, vi
                                 .fillMaxWidth()
                                 .padding(top = 8.dp)
                         ) {
-                            itemsIndexed(nonNullSeatModel.seats) {s, seat ->
+                            itemsIndexed(nonNullSeatModel.seats) { s, seat ->
                                 SeatButton(
                                     text = "${s + 1}",
                                     seat = seat,
                                     selectedSeats = viewModel.selectedSeats,
                                     onSeatSelected = { selectedSeat ->
-                                        viewModel.selectedSeats = if (viewModel.selectedSeats.contains(selectedSeat)) {
-                                            viewModel.selectedSeats - selectedSeat
-                                        } else {
-                                            viewModel.selectedSeats + selectedSeat
-                                        }
+                                        viewModel.selectedSeats =
+                                            if (viewModel.selectedSeats.contains(selectedSeat)) {
+                                                viewModel.selectedSeats - selectedSeat
+                                            } else {
+                                                viewModel.selectedSeats + selectedSeat
+                                            }
                                     })
                             }
                         }
@@ -471,6 +482,7 @@ fun SeatButton(text: String, seat: Seat, selectedSeats: Set<Seat>, onSeatSelecte
         "Available" -> {
             if (selectedSeats.contains(seat)) Color.Black else MaterialTheme.colorScheme.primary
         }
+
         else -> Color.Gray // Default color for unknown status
     }
 
@@ -553,9 +565,14 @@ fun ComboBox(
                         expanded = true,
                         onDismissRequest = { onToggleDropdown() }
                     ) {
-                        values.forEach {value ->
+                        values.forEach { value ->
                             DropdownMenuItem(
-                                text = { Text("${value.start_time} - ${value.end_time}", color = Color.Black) },
+                                text = {
+                                    Text(
+                                        "${value.start_time} - ${value.end_time}",
+                                        color = Color.Black
+                                    )
+                                },
                                 onClick = {
                                     onValueChange(value)
                                     onToggleDropdown()
@@ -699,9 +716,12 @@ private fun CustomTopBar() {
     }
 }
 
-private fun <T : Serializable?> getSerializable(activity: Activity, name: String, clazz: Class<T>): T
-{
-    return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+private fun <T : Serializable?> getSerializable(
+    activity: Activity,
+    name: String,
+    clazz: Class<T>
+): T {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
         activity.intent.getSerializableExtra(name, clazz)!!
     else
         activity.intent.getSerializableExtra(name) as T

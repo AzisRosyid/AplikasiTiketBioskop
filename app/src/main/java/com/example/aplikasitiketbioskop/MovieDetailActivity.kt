@@ -64,7 +64,8 @@ class MovieDetailActivity : ComponentActivity() {
 
                     Button(
                         onClick = {
-                            val intent = Intent(this@MovieDetailActivity, TicketOrderActivity::class.java)
+                            val intent =
+                                Intent(this@MovieDetailActivity, TicketOrderActivity::class.java)
                             intent.putExtra("movie", movie)
                             this@MovieDetailActivity.startActivity(intent)
                         },
@@ -125,7 +126,7 @@ private fun MovieDetailContent(movie: Movie) {
         MovieDetailRow("Release Date", movie.release_date)
         MovieDetailRow("Genre", movie.genre)
         MovieDetailRow("Price", Helper.currencyFormat(movie.price))
-        
+
         Spacer(modifier = Modifier.height(20.dp))
 
         Box(
@@ -147,10 +148,10 @@ private fun MovieDetailContent(movie: Movie) {
                         modifier = Modifier.fillMaxWidth(),
                         text = "Description",
                         style = MaterialTheme.typography.titleLarge
-                        .copy(
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White
-                        ),
+                            .copy(
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White
+                            ),
                         textAlign = TextAlign.Center
                     )
                 }
@@ -234,9 +235,12 @@ private fun CustomTopBar() {
     }
 }
 
-private fun <T : Serializable?> getSerializable(activity: Activity, name: String, clazz: Class<T>): T
-{
-    return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+private fun <T : Serializable?> getSerializable(
+    activity: Activity,
+    name: String,
+    clazz: Class<T>
+): T {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
         activity.intent.getSerializableExtra(name, clazz)!!
     else
         activity.intent.getSerializableExtra(name) as T

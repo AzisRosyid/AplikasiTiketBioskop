@@ -49,19 +49,19 @@ object Helper {
     val BASE_URL = "http://192.168.21.1/Bioskop API/bioskop_api/public/api/"
     val DATE_PATTERN = "EEEE, dd MMMM yyyy"
 
-    fun message(message: String, activity: Activity, action: Boolean = false){
+    fun message(message: String, activity: Activity, action: Boolean = false) {
         val alertDialog = AlertDialog.Builder(activity)
             .setTitle("Message")
             .setMessage(message)
-            .setPositiveButton("Ok"){dialog, which ->
-                if(action){
+            .setPositiveButton("Ok") { dialog, which ->
+                if (action) {
                     activity.finish()
                 }
             }
         alertDialog.show()
     }
 
-   fun currencyFormat(price: Double): String {
-       return NumberFormat.getCurrencyInstance(Locale("id", "ID")).format(price)
-   }
+    fun currencyFormat(price: Double): String {
+        return NumberFormat.getCurrencyInstance(Locale("id", "ID")).format(price)
+    }
 }

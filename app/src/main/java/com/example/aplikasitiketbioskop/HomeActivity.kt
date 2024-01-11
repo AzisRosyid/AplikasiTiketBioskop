@@ -109,7 +109,9 @@ class HomeActivity : ComponentActivity() {
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            modifier = Modifier.padding(16.dp).padding(vertical = 40.dp)
+            modifier = Modifier
+                .padding(16.dp)
+                .padding(vertical = 40.dp)
         ) {
             items(movies) { movie ->
                 MovieCard(movie = movie)
@@ -195,7 +197,10 @@ private fun MovieCard(movie: Movie) {
                     modifier = Modifier.padding(bottom = 4.dp)
                 )
                 Text(text = "Genre: ${movie.genre}", style = typography.bodyMedium)
-                Text(text = "Price: ${Helper.currencyFormat(movie.price)}", style = typography.bodyMedium)
+                Text(
+                    text = "Price: ${Helper.currencyFormat(movie.price)}",
+                    style = typography.bodyMedium
+                )
             }
         }
     }

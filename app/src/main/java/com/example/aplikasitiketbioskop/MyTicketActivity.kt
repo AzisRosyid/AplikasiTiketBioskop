@@ -135,7 +135,7 @@ private fun TicketCard(ticket: Ticket) {
                 model = "${Helper.BASE_IMAGE}${ticket.movie_image}"
             }
 
-            Row (
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
@@ -161,9 +161,15 @@ private fun TicketCard(ticket: Ticket) {
                         modifier = Modifier.padding(bottom = 4.dp)
                     )
                     Text(text = "Date: ${ticket.date}", style = MaterialTheme.typography.bodyMedium)
-                    Text(text = "Time: ${ticket.start_time} - ${ticket.end_time}", style = MaterialTheme.typography.bodyMedium)
+                    Text(
+                        text = "Time: ${ticket.start_time} - ${ticket.end_time}",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text(text = "Status: ${ticket.status}", style = MaterialTheme.typography.bodyLarge)
+                    Text(
+                        text = "Status: ${ticket.status}",
+                        style = MaterialTheme.typography.bodyLarge
+                    )
                 }
             }
         }

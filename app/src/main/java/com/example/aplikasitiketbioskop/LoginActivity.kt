@@ -233,7 +233,7 @@ fun GreetingPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            LoginScreen(viewModel) {  }
+            LoginScreen(viewModel) { }
         }
     }
 }

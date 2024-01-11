@@ -30,14 +30,22 @@ interface ApiEndPoint {
     fun showMovie(@Path("id") id: Int): Call<MovieModel>
 
     @GET("seat")
-    fun getSeat(@Query("movie_schedule_id") id: Int, @Query("screening_date") date: String): Call<SeatModel>
+    fun getSeat(
+        @Query("movie_schedule_id") id: Int,
+        @Query("screening_date") date: String
+    ): Call<SeatModel>
 
     @POST("order")
     fun createOrder(): Call<OrderModel>
 
     @FormUrlEncoded
     @POST("order/detail")
-    fun createOrderDetail(@Field("order_id") order: Int, @Field("movie_schedule_id") schedule: Int, @Field("seat_id") seat: Int, @Field("date_screening") date: String): Call<ResponseModel>
+    fun createOrderDetail(
+        @Field("order_id") order: Int,
+        @Field("movie_schedule_id") schedule: Int,
+        @Field("seat_id") seat: Int,
+        @Field("date_screening") date: String
+    ): Call<ResponseModel>
 
     @GET("ticket")
     fun getTicket(): Call<TicketModel>

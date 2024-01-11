@@ -113,8 +113,11 @@ private fun TicketDetailContent(ticket: Ticket) {
         TicketDetailRow("Cinema", ticket.cinema)
         TicketDetailRow("Seat", ticket.seat.toString())
         TicketDetailRow("Price", Helper.currencyFormat(ticket.movie_price))
-        TicketDetailRow("Date", SimpleDateFormat(Helper.DATE_PATTERN, Locale.getDefault()).format(
-            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(ticket.date)));
+        TicketDetailRow(
+            "Date", SimpleDateFormat(Helper.DATE_PATTERN, Locale.getDefault()).format(
+                SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(ticket.date)
+            )
+        );
         TicketDetailRow("Time", "${ticket.start_time} - ${ticket.end_time}")
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -125,25 +128,25 @@ private fun TicketDetailContent(ticket: Ticket) {
         }
 
         Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(
-                            color = color,
-                            shape = RoundedCornerShape(20.dp)
-                        )
-                        .padding(12.dp)
-                ) {
-                    Text(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = ticket.status,
-                        style = MaterialTheme.typography.titleLarge
-                            .copy(
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White
-                            ),
-                        textAlign = TextAlign.Center
-                    )
-                }
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    color = color,
+                    shape = RoundedCornerShape(20.dp)
+                )
+                .padding(12.dp)
+        ) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = ticket.status,
+                style = MaterialTheme.typography.titleLarge
+                    .copy(
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    ),
+                textAlign = TextAlign.Center
+            )
+        }
 
         Spacer(
             modifier = Modifier
@@ -213,9 +216,12 @@ private fun CustomTopBar() {
     }
 }
 
-private fun <T : Serializable?> getSerializable(activity: Activity, name: String, clazz: Class<T>): T
-{
-    return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+private fun <T : Serializable?> getSerializable(
+    activity: Activity,
+    name: String,
+    clazz: Class<T>
+): T {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
         activity.intent.getSerializableExtra(name, clazz)!!
     else
         activity.intent.getSerializableExtra(name) as T
